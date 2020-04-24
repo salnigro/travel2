@@ -1,5 +1,6 @@
 from Enemy import Enemy
 from Test import Test
+from Fight import Fight
 import random
 import tkinter as tk
 from tkinter import *
@@ -80,5 +81,6 @@ class Forest(Frame):
         self.root.mainloop();
 
     def battle(self, player, enemy):
-        self.test = Test()
+        self.test = Fight(player, enemy)
+        # self.test1 = Test()
         self.move(player)

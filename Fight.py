@@ -10,20 +10,10 @@ class Fight(object):
         self.enemy = enemy
 
     def battle(self, player, enemy):
-        # canvas = Canvas(self.root2, width=300, height=300)
-        # img = PhotoImage(master=canvas, file='orc.png', width=300, height=300)
-        # canvas.create_image((50, 50), image=img, state="normal", anchor=NW)
-        # canvas.pack()
-        path = "orc.png"
-
-        # Creates a Tkinter-compatible photo image, which can be used everywhere Tkinter expects an image object.
-        img = ImageTk.PhotoImage(Image.open(path))
-
-        # The Label widget is a standard Tkinter widget used to display a text or image on the screen.
-        panel = tk.Label(self.root2, image=img)
-
-        # The Pack geometry manager packs widgets in rows or columns.
-        panel.pack(side="bottom", fill="both", expand="yes")
+        canvas = Canvas(self.root2, width=300, height=300)
+        img = PhotoImage(master=canvas, file='orc.png', width=300, height=300)
+        canvas.create_image((50, 50), image=img, state="normal", anchor=NW)
+        canvas.pack()
 
         if enemy.health > 0:
             if player.health > 0:
