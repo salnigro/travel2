@@ -7,7 +7,7 @@ import tkinter as tk
 
 
 class World(object):
-    #root = tk.Tk()
+    # root = tk.Tk()
 
     def __init__(self, player):
 
@@ -36,9 +36,9 @@ class World(object):
         for i in range(len(self.array)):
             button = tk.Button(frame, text=self.array[i], command=lambda: self.town(self.array[i]))
             button.place(relx=0, rely=.2 * i, relwidth=.5, relheight=.1)
-        
+        button = tk.Button(frame, text="forest", command=lambda: self.forest.move(self.player))
+        button.place(relx=0, rely=.2 * 4, relwidth=.5, relheight=.1)
         self.root.mainloop()
-
 
     def town(self, name):
         for i in range(len(self.towns)):

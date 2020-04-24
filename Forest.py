@@ -1,29 +1,20 @@
 from Enemy import Enemy
+from Test import Test
 import random
-import numpy as np
-import cv2
+import tkinter as tk
+from tkinter import *
 
-class Forest(object):
+
+class Forest(Frame):
     def __init__(self):
+
+        self.root = tk.Tk()
+        self.pos = [0, 0]
         self.woods = 1
 
-    def move(self, player):
+    def left(self, player):
+        self.pos[0] -= 1
 
-        pos = [0,0]
-
-        t = input(" left right up down or leave ")
-        if t == "t":
-            return 0
-        if t == "left":
-            pos[0] -= 1
-        if t == "right":
-            pos[0] += 1
-        if t == "up":
-            pos[1] += 1
-        if t == "down":
-            pos[0] -= 1
-        if t == "leave":
-            return 0
         rand = random.randrange(0, 20)
 
         if rand < 21:
@@ -33,49 +24,61 @@ class Forest(object):
             tr = random.randrange(0, 10)
             print(str(tr))
             player.gold += tr
-        self.move()
 
+    def up(self, player):
+        self.pos[1] += 1
+
+        rand = random.randrange(0, 20)
+
+        if rand < 21:
+            self.battle(player, Enemy(player.level))
+        elif rand < 21:
+            print("Found Gold ")
+            tr = random.randrange(0, 10)
+            print(str(tr))
+            player.gold += tr
+
+    def down(self, player):
+        self.pos[1] -= 1
+
+        rand = random.randrange(0, 20)
+
+        if rand < 21:
+            self.battle(player, Enemy(player.level))
+        elif rand < 21:
+            print("Found Gold ")
+            tr = random.randrange(0, 10)
+            print(str(tr))
+            player.gold += tr
+
+    def right(self, player):
+        self.pos[0] += 1
+        rand = random.randrange(0, 20)
+
+        if rand < 21:
+            self.battle(player, Enemy(player.level))
+        elif rand < 21:
+            print("Found Gold ")
+            tr = random.randrange(0, 10)
+            print(str(tr))
+            player.gold += tr
+
+    def move(self, player):
+
+        frame = tk.Frame(self.root, bg='#80c1ff', bd=5)
+        frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+        button = tk.Button(frame, text="left", command=lambda: self.left(player))
+        button.place(relx=0, rely=.2 * 1, relwidth=.5, relheight=.1)
+        button = tk.Button(frame, text="right", command=lambda: self.right(player))
+        button.place(relx=0, rely=.2 * 2, relwidth=.5, relheight=.1)
+        button = tk.Button(frame, text="up", command=lambda: self.up(player))
+        button.place(relx=0, rely=.2 * 3, relwidth=.5, relheight=.1)
+        button = tk.Button(frame, text="down", command=lambda: self.down(player))
+        button.place(relx=0, rely=.2 * 4, relwidth=.5, relheight=.1)
+
+        self.root.mainloop();
 
     def battle(self, player, enemy):
-        img = cv2.imread('orc.jpg',0)
-        if enemy.health > 0:
-            if player.health > 0:
-                if player.speed < enemy.speed:
-                    print(enemy.name + " attacks ")
-                    player.health -= enemy.attack
-                    print("Player health is " + str(player.health))
-                else:
-                    print("Enemy is a(n) " + enemy.name)
-                    t = input(" run or attack ")
-                    if t == "attack":
-                        enemy.health -= player.attack
-                        if enemy.health < 0:
-                            enemy.health = 0
-                        print(enemy.name + " health is " + str(enemy.health))
-                        print(enemy.name + " attacks")
-                        player.health -= enemy.attack
-                        print("Player health is " + str(player.health))
-                        self.battle(player, enemy)
-                    else:
-                        self.move(player)
-
-                t = input(" run or attack ")
-                if t == "attack":
-                    enemy.health -= player.attack
-                    if enemy.health < 0:
-                        enemy.health = 0
-                    print(enemy.name + " health is " + str(enemy.health))
-                    self.battle(player, enemy)
-                else:
-                    self.move(player)
-            else:
-                print("player dead")
-                print(1 + "t")
-
-        else:
-            print("you win")
-            print(player.name + " gained " + str(enemy.exp))
-            player.exp += 20
-            player.update()
-
+        self.test = Test()
         self.move(player)
