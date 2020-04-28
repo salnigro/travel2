@@ -1,22 +1,21 @@
+from Quest import Quest
+import tkinter as tk
+
 
 class Npc(object):
-    def __init__(self,quest):
-        self.quest = quest
+    def __init__(self):
+        self.quest = Quest()
 
     def speech(self):
-        if(self.quest.cpm == 0):
-            t = input("I need your help adventurer (y/n)")
-            if(t == "y"):
-                print("Thanks you adventure i need you to do " + self.quest.task)
-                self.quest.cpm = 1
-        if(self.quest.cpm == 1):
-            s = input("did you do it (y/n)")
-            if (s == "y"):
-                print("Thanks")
-                self.quest.cpm = 2
-            else:
-                print("please hurry")
+        self.root = tk.Tk()
+        frame = tk.Frame(self.root, bg='#80c1ff', bd=5)
+        frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+        if self.quest.cpm == 1:
+            label = tk.Label(frame, text="Did you do it")
+            label.place(x=100, y=200)
+            button = tk.Button(frame, text="yes", command=lambda: self.complete())
+            button.place(relx=0, rely=.1 * 8, relwidth=.5, relheight=.1)
+        self.root.mainloop()
 
-        if(self.quest.cpm == 2):
-            print("thanks again")
-           
+    def complete(self):
+        self.quest.cpm = 2

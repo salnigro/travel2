@@ -5,9 +5,8 @@ import tkinter as tk
 
 class Town(object):
     def __init__(self, npc, name, location):
-
+        self.leave = 0
         self.array = []
-        # self.shop = shop
         self.npc = npc
         self.name = name
         self.location = location
@@ -61,17 +60,9 @@ class Town(object):
 
     # Road("9 rd",[1,2],[2,2]),Road("10 rd",[2,0],[2,2])
 
-    def menu(self, st):
+    def menu(self, st, player):
         self.array = []
         self.root = tk.Tk()
-        if st == [1, 4]:
-            self.npc[0].speech()
-        if st == [1, 3]:
-            self.npc[1].speech()
-        if st == [-1, 3]:
-            self.npc[2].speech()
-        if st == [1, 2]:
-            self.npc[3].speech()
         for i in range(0, len(self.roadp)):
             if st == self.roadp[i].start:
                 for j in range(len(self.roadp)):
@@ -84,12 +75,49 @@ class Town(object):
         frame = tk.Frame(self.root, bg='#80c1ff', bd=5)
         frame.place(relx=0, rely=0, relwidth=1, relheight=1)
         for i in range(len(self.array)):
-            button = tk.Button(frame, text=self.array[i], command=lambda: self.road(self.array[i]))
+            button = tk.Button(frame, text=self.array[i], command=lambda: self.road(self.array[i], player))
             button.place(relx=0, rely=.1 * i, relwidth=.5, relheight=.1)
+        button = tk.Button(frame, text="leave", command=lambda: self.leaves())
+        button.place(relx=0, rely=.1 * 8, relwidth=.5, relheight=.1)
+        if self.leave == 1:
+            return
         self.root.mainloop()
 
-    def road(self, name):
+    def leaves(self):
+        self.root.destroy()
+        self.leave = 1
+
+    def road(self, name, player):
+
         for i in range(len(self.roads)):
             if name == self.roads[i].name:
                 st = self.roads[int(i)].start
-                self.menu(st)
+                self.root.destroy()
+        self.root2 = tk.Tk()
+        frame = tk.Frame(self.root2, bg='#80c1ff', bd=5)
+        frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+        if st == [1, 4]:
+            button = tk.Button(frame, text="Talk", command=lambda: self.talk(self.npc[0]))
+            button.place(relx=0, rely=.1 * 8, relwidth=.5, relheight=.1)
+            player.quest.append(self.npc[0].quest.task)
+        elif st == [1, 3]:
+            button = tk.Button(frame, text="Talk", command=lambda: self.talk(self.npc[1]))
+            button.place(relx=0, rely=.1 * 8, relwidth=.5, relheight=.1)
+            player.quest.append(self.npc[1].quest.task)
+        elif st == [-1, 3]:
+            button = tk.Button(frame, text="Talk", command=lambda: self.talk(self.npc[2]))
+            button.place(relx=0, rely=.1 * 8, relwidth=.5, relheight=.1)
+            player.quest.append(self.npc[2].quest.task)
+        elif st == [1, 2]:
+            button = tk.Button(frame, text="Talk", command=lambda: self.talk(self.npc[3]))
+            button.place(relx=0, rely=.1 * 8, relwidth=.5, relheight=.1)
+            player.quest.append(self.npc[3].quest.task)
+        else:
+            self.root2.destroy()
+        self.root2.mainloop()
+        self.menu(st, player)
+
+    def talk(self, npc):
+        self.root2.destroy()
+        npc.speech()
+        return

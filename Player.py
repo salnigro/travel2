@@ -1,4 +1,6 @@
 from decimal import *
+from Quest import Quest
+
 
 class Player(object):
 
@@ -8,11 +10,13 @@ class Player(object):
         self.level = level
         self.gold = gold
         self.location = location
-        self.health = 40
-        self.attack = 6
-        self.defense = 4
+        self.health = 20
+        self.attack = 10
+        self.defense = 8
         self.speed = 5
-        self.set = 40
+        self.set = 20
+        self.counter = []
+        self.quest = []
 
     def update(self):
         t = int(((Decimal(1.6363319771444 ** -6) * (self.level ** 4)) -
@@ -23,9 +27,9 @@ class Player(object):
         if self.exp > t:
             self.level += 1
             self.set += 10
-            self.attack += 1
-            self.defense += 1
-            self.speed += 1
+            self.attack += 3
+            self.defense += 2
+            self.speed += 2
             self.exp = self.exp - t
             self.health = self.set
             print(str(self.level))
@@ -41,6 +45,3 @@ class Player(object):
             print(str(self.defense))
             print(str(self.speed))
             print(str(self.exp))
-
-    
-    
