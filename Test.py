@@ -99,4 +99,94 @@ class Test(object):
 
         if self.quest.cpm == 2:
             print("thanks again")
+        self.root2 = tk.Tk()
+        frame = tk.Frame(self.root2, bg='#80c1ff', bd=5)
+        frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+        self.root2.mainloop()
+        st = 1
+        if st == [1, 4]:
+            button = tk.Button(frame, text="Talk", command=lambda: self.talk(self.npc[0], player))
+            button.place(relx=0, rely=.2, relwidth=.5, relheight=.1)
+
+        elif st == [1, 3]:
+            button = tk.Button(frame, text="Talk", command=lambda: self.talk(self.npc[1], player))
+            button.place(relx=0, rely=.2, relwidth=.5, relheight=.1)
+
+        elif st == [-1, 3]:
+            button = tk.Button(frame, text="Talk", command=lambda: self.talk(self.npc[2], player))
+            button.place(relx=0, rely=.2, relwidth=.5, relheight=.1)
+
+        elif st == [1, 2]:
+            button = tk.Button(frame, text="Talk", command=lambda: self.talk(self.npc[3], player))
+            button.place(relx=0, rely=.2, relwidth=.5, relheight=.1)
+
+        else:
+            self.root2.destroy()
+
+            frame = tk.Frame(self.root, bg='#80c1ff', bd=5)
+            frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+            button = tk.Button(frame, text="left", command=lambda: self.left(player))
+            button.place(relx=0, rely=.2 * 0, relwidth=.2, relheight=.1)
+            button = tk.Button(frame, text="right", command=lambda: self.right(player))
+            button.place(relx=0, rely=.2 * 1, relwidth=.2, relheight=.1)
+            button = tk.Button(frame, text="up", command=lambda: self.up(player))
+            button.place(relx=0, rely=.2 * 2, relwidth=.2, relheight=.1)
+            button = tk.Button(frame, text="down", command=lambda: self.down(player))
+            button.place(relx=0, rely=.2 * 3, relwidth=.2, relheight=.1)
+            button = tk.Button(frame, text="leave", command=lambda: self.leave())
+            button.place(relx=0, rely=.2 * 4, relwidth=.2, relheight=.1)
+            label = tk.Label(frame, text=player.quest[0])
+            label.place(relx=0.5, rely=.2, relwidth=.5, relheight=.2)
+    def left(self, player):
+        self.pos[0] -= 1
+
+        rand = random.randrange(0, 20)
+
+        if rand < 21:
+            self.battle(player, Enemy(player.level))
+        elif rand < 21:
+            print("Found Gold ")
+            tr = random.randrange(0, 10)
+            print(str(tr))
+            player.gold += tr
+
+    def up(self, player):
+        self.pos[1] += 1
+
+        rand = random.randrange(0, 20)
+
+        if rand < 21:
+            self.battle(player, Enemy(player.level))
+        elif rand < 21:
+            print("Found Gold ")
+            tr = random.randrange(0, 10)
+            print(str(tr))
+            player.gold += tr
+
+    def down(self, player):
+        self.pos[1] -= 1
+
+        rand = random.randrange(0, 20)
+
+        if rand < 21:
+            self.battle(player, Enemy(player.level))
+        elif rand < 21:
+            print("Found Gold ")
+            tr = random.randrange(0, 10)
+            print(str(tr))
+            player.gold += tr
+
+    def right(self, player):
+        self.pos[0] += 1
+        rand = random.randrange(0, 20)
+
+        if rand < 21:
+            self.battle(player, Enemy(player.level))
+        elif rand < 21:
+            print("Found Gold ")
+            tr = random.randrange(0, 10)
+            print(str(tr))
+            player.gold += tr
 

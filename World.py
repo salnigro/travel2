@@ -50,7 +50,6 @@ class World(object):
                 self.player.location = self.towns[int(i)].roads[0].start
                 self.towns[int(i)].menu(self.player.location, self.player)
                 self.player.location = self.towns[int(i)].location
-
         self.menu()
 
     def forrest(self):

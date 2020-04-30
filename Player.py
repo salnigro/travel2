@@ -10,8 +10,8 @@ class Player(object):
         self.level = level
         self.gold = gold
         self.location = location
-        self.health = 20
-        self.attack = 10
+        self.health = 50
+        self.attack = 20
         self.defense = 8
         self.speed = 5
         self.set = 20

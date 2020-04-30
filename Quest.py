@@ -5,10 +5,10 @@ class Quest(object):
     def __init__(self):
         self.gold = 0
         self.exp = 0
-        self.task = self.gtask()
-        self.cpm = 1
+        self.task = self.tasks()
+        self.cpm = 0
 
-    def gtask(self):
+    def tasks(self):
         rand = random.randrange(0, 100)
         if rand < 25:
             self.gold = 5
