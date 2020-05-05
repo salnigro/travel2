@@ -1,5 +1,4 @@
 from Enemy import Enemy
-from Test import Test
 from Fight import Fight
 import random
 import tkinter as tk
@@ -30,7 +29,7 @@ class Forest(Frame):
         self.x = self.pos[0]*100 + 100
         self.y = 400 - self.pos[1] * 100
 
-        self.move(player)
+        self.move(player, 1)
 
     def gdown(self, player):
         self.root.destroy()
@@ -38,7 +37,7 @@ class Forest(Frame):
         self.pos[1] -= 1
         self.x = self.pos[0] * 100 + 100
         self.y = 400 - self.pos[1] * 100
-        self.move(player)
+        self.move(player, 1)
 
     def gright(self, player):
         self.root.destroy()
@@ -46,7 +45,7 @@ class Forest(Frame):
         self.pos[0] += 1
         self.x = self.pos[0] * 100 + 100
         self.y = 400 - self.pos[1] * 100
-        self.move(player)
+        self.move(player, 1)
 
     def gleft(self, player):
         self.root.destroy()
@@ -54,9 +53,13 @@ class Forest(Frame):
         self.pos[0] -= 1
         self.x = self.pos[0] * 100 + 100
         self.y = 400 - self.pos[1] * 100
-        self.move(player)
+        self.move(player, 1)
 
-    def move(self, player):
+    def move(self, player, t):
+        if t == 0:
+            self.pos = [0, 0]
+            self.x = 100
+            self.y = 400
 
         self.root = tk.Tk()
         self.root.geometry("600x500")
@@ -75,6 +78,8 @@ class Forest(Frame):
         canvas.create_line(100, 500, 500, 500, fill='blue', width=5)
         canvas.create_rectangle(self.x - 5, self.y - 5, self.x + 5, self.y + 5, fill='red')
         canvas.pack()
+        button = tk.Button(self.frame, text="leave", command=lambda: self.leave(player))
+        button.place(relx=0, rely=0, relwidth=.07, relheight=.05)
         for i in range(len(self.cord)):
             if self.pos[0] == self.cord[i][0]:
                 if self.pos[1] + 1 == self.cord[i][1]:
@@ -90,8 +95,8 @@ class Forest(Frame):
                     self.right.place(relx=0, rely=.3, relwidth=.07, relheight=.05)
             if self.pos[0] - 1 == self.cord[i][0]:
                 if self.pos[1] == self.cord[i][1]:
-                    left = tk.Button(self.frame, text="left", command=lambda: self.gleft(player))
-                    left.place(relx=0, rely=.4, relwidth=.07, relheight=.05)
+                    self.left = tk.Button(self.frame, text="left", command=lambda: self.gleft(player))
+                    self.left.place(relx=0, rely=.4, relwidth=.07, relheight=.05)
 
         self.root.mainloop()
 
@@ -100,7 +105,8 @@ class Forest(Frame):
         self.fight.start(player, enemy)
         return
 
-    def leave(self):
+    def leave(self, player):
+        player.health = player.set
         self.root.destroy()
 
     def does(self, player, enemy):
@@ -109,12 +115,11 @@ class Forest(Frame):
                 if self.events[i] == 1:
                     self.battle(player, enemy)
                     break
-                if self.events[i] == 0:
+                if self.events[i] < 4:
                     self.battle(player, enemy)
                     break
-                if self.events[i] == 2:
-                    print("Found Gold")
-                    player.gold += 10
+                if self.events[i] == 3:
+                    t = 0
         return
 
 

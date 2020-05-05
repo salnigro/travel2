@@ -25,14 +25,14 @@ class Quest(object):
         if rand < 90:
             self.gold = 15
             self.exp = 30
-            return " kill ten orc "
+            return " kill ten orcs "
         if rand < 98:
             self.gold = 15
             self.exp = 30
-            return " kill ten black bear "
+            return " kill ten black bears "
         if rand < 100:
             self.gold = 40
             self.exp = 70
-            return " kill ten dire wolf "
+            return " kill ten dire wolves "
 
         return rand

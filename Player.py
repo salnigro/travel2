@@ -1,4 +1,5 @@
 from decimal import *
+import tkinter as tk
 from Quest import Quest
 
 
@@ -10,15 +11,16 @@ class Player(object):
         self.level = level
         self.gold = gold
         self.location = location
-        self.health = 50
-        self.attack = 20
-        self.defense = 8
+        self.health = 20
+        self.attack = 8
+        self.defense = 10
         self.speed = 5
         self.set = 20
         self.counter = []
         self.quest = []
 
     def update(self):
+
         t = int(((Decimal(1.6363319771444 ** -6) * (self.level ** 4)) -
                  Decimal(2.3500018552718 ** -4) * (self.level ** 3)
                  + Decimal(2.4081865400999) * (self.level ** 2) +
@@ -32,16 +34,4 @@ class Player(object):
             self.speed += 2
             self.exp = self.exp - t
             self.health = self.set
-            print(str(self.level))
-            print(str(self.health))
-            print(str(self.attack))
-            print(str(self.defense))
-            print(str(self.speed))
-            print(str(self.exp))
-        else:
-            print(str(self.level))
-            print(str(self.health))
-            print(str(self.attack))
-            print(str(self.defense))
-            print(str(self.speed))
-            print(str(self.exp))
+

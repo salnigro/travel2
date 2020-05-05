@@ -4,10 +4,10 @@ import tkinter as tk
 
 
 class Town(object):
-    def __init__(self, npc, name, location):
+    def __init__(self, name, location):
         self.leave = 0
         self.array = []
-        self.npc = npc
+        self.npc = [Npc(), Npc(), Npc(), Npc()]
         self.name = name
         self.location = location
         self.roads = [
