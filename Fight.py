@@ -1,9 +1,6 @@
 import tkinter as tk
 from tkinter import *
 import random
-from Player import Player
-import requests
-from PIL import ImageTk, Image
 
 
 class Fight(object):

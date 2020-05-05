@@ -1,6 +1,4 @@
 from decimal import *
-import tkinter as tk
-from Quest import Quest
 
 
 class Player(object):

@@ -3,7 +3,7 @@ from Fight import Fight
 import random
 import tkinter as tk
 from tkinter import *
-from Player import Player
+
 
 
 class Forest(Frame):
