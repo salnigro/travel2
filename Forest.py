@@ -112,14 +112,9 @@ class Forest(Frame):
     def does(self, player, enemy):
         for i in range(len(self.cord)):
             if self.pos == self.cord[i]:
-                if self.events[i] == 1:
+                if self.events[i] < 2:
                     self.battle(player, enemy)
                     break
-                if self.events[i] < 4:
-                    self.battle(player, enemy)
-                    break
-                if self.events[i] == 3:
-                    t = 0
         return
 
 
